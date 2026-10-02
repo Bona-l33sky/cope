@@ -18,7 +18,7 @@ const ODDS_TOLERANCE = 0.05;  // if the price moved more than this, ask the play
 const app = express();
 app.use(express.json());
 // Only these three files are public. Everything else in the folder stays private.
-const PAGES = { '/': 'index.html', '/index.html': 'index.html', '/style.css': 'style.css', '/app.js': 'app.js' };
+const PAGES = { '/': 'index.html', '/index.html': 'index.html', '/style.css': 'style.css', '/app.js': 'app.js', '/favicon.svg': 'favicon.svg', '/favicon.png': 'favicon.png', '/favicon.ico': 'favicon.png' };
 app.get(Object.keys(PAGES), (req, res) => res.sendFile(path.join(__dirname, PAGES[req.path])));
 
 // ---------- helpers ----------
