@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>cope · shots and saves, more or less</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars"></div>
+
+<!-- LOGIN -->
+<div id="auth" class="auth hidden">
+  <div class="auth-card glass">
+    <div class="logo big"><span class="c">c</span>ope<span class="dot">.</span></div>
+    <p class="muted">Shots and saves, more or less. Real live stats, points only. 18+.</p>
+    <input id="au-user" placeholder="username" autocomplete="username">
+    <input id="au-pass" type="password" placeholder="password (6+ characters)" autocomplete="current-password">
+    <div class="row gap">
+      <button class="btn grad" id="au-login">Log in</button>
+      <button class="btn ghost" id="au-signup">Create account</button>
+    </div>
+    <p id="au-err" class="err"></p>
+    <p class="tiny muted">New accounts start with free points. No real money, ever, in this demo.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <header class="top">
+    <div class="logo"><span class="c">c</span>ope<span class="dot">.</span></div>
+    <nav id="nav">
+      <a data-page="today" class="on">today</a>
+      <a data-page="card">more or less</a>
+      <a data-page="player">players</a>
+      <a data-page="portfolio">portfolio</a>
+      <a data-page="leagues">leagues</a>
+    </nav>
+    <div class="pills">
+      <span class="pill" id="mode-pill">live</span>
+      <span class="pill">🔥 <b id="streak">0</b></span>
+      <span class="pill">🪙 <b id="points">0</b></span>
+      <button class="pill btn-pill" id="logout" title="log out">⎋</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- TODAY -->
+    <section id="p-today" class="page">
+      <div id="today-hero"></div>
+      <div class="grid2">
+        <div>
+          <h3 class="label">your picks in this match</h3>
+          <div id="today-picks" class="stack"></div>
+          <h3 class="label">match feed</h3>
+          <div id="today-feed" class="glass feed"></div>
+        </div>
+        <div>
+          <h3 class="label">everyone priced in this match</h3>
+          <div id="today-players" class="glass list"></div>
+          <h3 class="label">other matches</h3>
+          <div id="today-others" class="stack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE OR LESS -->
+    <section id="p-card" class="page hidden">
+      <div class="head-row">
+        <div><h1>today's card</h1><p class="muted">Tap more or less. Up to 5 picks in one slip. Prices move live.</p></div>
+      </div>
+      <div id="league-pills" class="chips"></div>
+      <div class="grid-slip">
+        <div id="card-rows" class="glass list"></div>
+        <aside class="slip-wrap"><div class="slip glass" id="slip"></div></aside>
+      </div>
+    </section>
+
+    <!-- PLAYER -->
+    <section id="p-player" class="page hidden">
+      <div class="search-row"><input id="search" placeholder="search a player..."><div id="search-res" class="search-res glass hidden"></div></div>
+      <div class="grid-slip">
+        <div id="player-body"></div>
+        <aside class="slip-wrap"><div class="slip glass" id="slip2"></div></aside>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="p-portfolio" class="page hidden">
+      <h1>portfolio</h1>
+      <div id="pf-stats" class="tiles"></div>
+      <h3 class="label">running</h3>
+      <div id="pf-open" class="stack"></div>
+      <h3 class="label">settled</h3>
+      <div id="pf-settled" class="stack"></div>
+    </section>
+
+    <!-- LEAGUES -->
+    <section id="p-leagues" class="page hidden">
+      <h1>leagues</h1>
+      <div class="grid2">
+        <div>
+          <div id="lg-list" class="stack"></div>
+          <h3 class="label">how it works</h3>
+          <div class="glass pad rules">
+            <p><b>One stat each.</b> Outfield players: shots (on target, off target and blocked all count). Keepers: saves.</p>
+            <p><b>Official numbers.</b> Settled on the official match stats, a short delay after full time.</p>
+            <p><b>Didn't play?</b> If your player never comes on, that pick is void and points come back.</p>
+            <p><b>Slips.</b> Up to 5 picks. Every pick must land. A void pick drops out and the slip carries on.</p>
+            <p><b>Points only.</b> No deposits, no withdrawals, no prizes. 18+.</p>
+          </div>
+        </div>
+        <div>
+          <h3 class="label">play safe</h3>
+          <div class="glass pad" id="safe"></div>
+          <h3 class="label">top players</h3>
+          <div class="glass list" id="board"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabbar" id="tabbar">
+    <a data-page="today" class="on">⚡<span>today</span></a>
+    <a data-page="card">🎯<span>card</span></a>
+    <a data-page="player">👤<span>players</span></a>
+    <a data-page="portfolio">📊<span>bets</span></a>
+    <a data-page="leagues">🏆<span>leagues</span></a>
+  </nav>
+  <button id="slip-fab" class="slip-fab hidden">slip <b id="slip-count">0</b></button>
+</div>
+
+<div id="toast" class="toast"></div>
+<canvas id="confetti"></canvas>
+<script src="app.js"></script>
+</body>
+</html>

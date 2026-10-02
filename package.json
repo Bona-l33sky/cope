@@ -1,0 +1,16 @@
+{
+  "name": "cope",
+  "version": "1.0.0",
+  "description": "cope: shots and saves, more or less. Live football stats, points-only demo.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test-mode": "node server.js --test"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
