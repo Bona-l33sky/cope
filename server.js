@@ -2,11 +2,11 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const db = require('./src/db');
-const bus = require('./src/bus');
-const auth = require('./src/auth');
-const settle = require('./src/settle');
-const { price, mainLine, allLines } = require('./src/pricing');
+const db = require('./db');
+const bus = require('./bus');
+const auth = require('./auth');
+const settle = require('./settle');
+const { price, mainLine, allLines } = require('./pricing');
 
 const TEST = process.argv.includes('--test');
 const PORT = parseInt(process.env.PORT || '3000', 10);
@@ -17,7 +17,9 @@ const ODDS_TOLERANCE = 0.05;  // if the price moved more than this, ask the play
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Only these three files are public. Everything else in the folder stays private.
+const PAGES = { '/': 'index.html', '/index.html': 'index.html', '/style.css': 'style.css', '/app.js': 'app.js' };
+app.get(Object.keys(PAGES), (req, res) => res.sendFile(path.join(__dirname, PAGES[req.path])));
 
 // ---------- helpers ----------
 const statOf = p => (p.position === 'GK' ? 'saves' : 'shots');
@@ -264,6 +266,6 @@ app.get('/api/stream', (req, res) => {
 // ---------- start ----------
 app.listen(PORT, () => {
   console.log(`\ncope is running: open http://localhost:${PORT}\n`);
-  if (TEST) require('./src/testmode').start(); else require('./src/live').start();
+  if (TEST) require('./testmode').start(); else require('./live').start();
   settle.start();
 });
