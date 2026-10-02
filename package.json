@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test-mode": "node server.js --test"
   },
-  "engines": { "node": ">=20" },
+  "engines": {"node": "22.x" },
   "dependencies": {
     "better-sqlite3": "^11.7.0",
     "dotenv": "^16.4.7",
